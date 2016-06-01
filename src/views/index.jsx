@@ -2,6 +2,7 @@ import React from 'react';
 import AnimatedLocations from 'react-router-component-transition'
 import {Location} from 'react-router-component'
 import MainPage from './MainPage'
+import SecondPage from './SecondPage'
 
 import '../utils/animation.css'
 
@@ -17,6 +18,8 @@ class Index extends React.Component{
 
                 <Location path="/" handler={MainPage} />
                 <Location path="/MainPage" handler={MainPage} />
+                <Location path="/SecondPage" handler={SecondPage} />
+
 
             </AnimatedLocations>
     )

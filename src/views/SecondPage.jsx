@@ -13,7 +13,7 @@ class MainPage extends React.Component{
         console.log(GlobalStores.getActionResult(ActionEvents.ACTION_EVENT))
     }
     componentDidMount(){
-        GlobalActions.actions('Main')
+        GlobalActions.actions('second')
     }
     componentWillUnmount(){
         GlobalStores.removeWholeListeners()
@@ -26,7 +26,7 @@ class MainPage extends React.Component{
         )
     }
     clickHandle(){
-        environment.hashEnvironment.navigate('/SecondPage',function(err){})
+        environment.hashEnvironment.navigate('/',{transitionName:'pop-right'},function(err){})
     }
 }
 

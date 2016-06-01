@@ -10,10 +10,7 @@ var WebAPIActions = {
         //         callback(result)
         //     }
         // })
-        let result = {
-            code:200,
-            data:[]
-        };
+        let result = value;
         callback(result)
     }
 };

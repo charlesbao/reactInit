@@ -1,13 +1,14 @@
 import AppDispatcher from'./Dispatcher';
 import WebAPIActions from './WebAPIActions'
+import {ActionEvents} from '../stores/GlobalStores'
+
 
 var GlobalActions = {
     actions: function(value){
         WebAPIActions.action(value,function(result){
             AppDispatcher.dispatch({
-                type: 'action',
-                data: result.data,
-                code: result.code
+                type: ActionEvents.ACTION_EVENT,
+                data: result,
             });
         })
     }

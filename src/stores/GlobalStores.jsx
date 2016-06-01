@@ -3,9 +3,9 @@ import assign from 'object-assign';
 
 import Dispatcher from '../actions/Dispatcher';
 
-var ResultStores = {};
+var _ResultStores = {};
 
-var ActionEvent = {
+var _ActionEvents = {
     ACTION_EVENT:'ACTION_EVENT'
 };
 
@@ -28,23 +28,19 @@ var GlobalStores = assign({}, EventEmitter.prototype, {
     },
 
     setActionResult: function(actionName,result){
-        ResultStores[actionName] = result;
+        _ResultStores[actionName] = result;
+        this.emitChange(actionName);
     },
 
     getActionResult: function(actionName){
-        return ResultStores[actionName]
+        return _ResultStores[actionName]
     }
 
 });
 
 GlobalStores.dispatchToken = Dispatcher.register(function(action) {
-    switch(action.type) {
-        case 'action':
-            GlobalStores.setActionResult('action',action.code);
-            GlobalStores.emitChange(ActionEvent.ACTION_EVENT);
-            break;
-    }
+    GlobalStores.setActionResult(_ActionEvents.ACTION_EVENT,action.data);
 });
 
 export default GlobalStores;
-export var ActionEvents = ActionEvent;
+export var ActionEvents = _ActionEvents;
