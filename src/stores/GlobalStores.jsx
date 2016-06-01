@@ -3,10 +3,16 @@ import assign from 'object-assign';
 
 import Dispatcher from '../actions/Dispatcher';
 
-var _ResultStores = {};
+var _ActionStores = {};
+var _DataStores = {};
 
 var _ActionEvents = {
-    ACTION_EVENT:'ACTION_EVENT'
+    GET_DRIBBBLE_EVENT:'GET_DRIBBBLE_EVENT'
+};
+
+var _DataEvents = {
+    DETAIL:'DETAIL',
+    SCROLL:'SCROLL'
 };
 
 var GlobalStores = assign({}, EventEmitter.prototype, {
@@ -28,19 +34,28 @@ var GlobalStores = assign({}, EventEmitter.prototype, {
     },
 
     setActionResult: function(actionName,result){
-        _ResultStores[actionName] = result;
+        _ActionStores[actionName] = result;
         this.emitChange(actionName);
     },
 
     getActionResult: function(actionName){
-        return _ResultStores[actionName]
+        return _ActionStores[actionName]
+    },
+
+    setDataStore: function(storeName,result){
+        _DataStores[storeName] = result;
+    },
+
+    getDataStore: function(storeName){
+        return _DataStores[storeName]
     }
 
 });
 
 GlobalStores.dispatchToken = Dispatcher.register(function(action) {
-    GlobalStores.setActionResult(_ActionEvents.ACTION_EVENT,action.data);
+    GlobalStores.setActionResult(action.type,action.data);
 });
 
 export default GlobalStores;
 export var ActionEvents = _ActionEvents;
+export var DataEvents = _DataEvents;
